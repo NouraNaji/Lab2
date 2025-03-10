@@ -1,0 +1,142 @@
+body {
+    font-family: "Times New Roman", Times, serif;
+    margin: 20px;
+}
+
+.page-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.links-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.link-box {
+    width: 80%;
+    padding: 15px;
+    text-align: center;
+}
+
+.green {
+    background-color: lightgreen;
+}
+
+.gray {
+    background-color: gray;
+}
+
+.black {
+    background-color: black;
+}
+
+.custom-link {
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.red {
+    color: red;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.white {
+    color: white;
+}
+
+.formatting-title {
+    background-color: #f9f9e6;
+    color: green;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.listing-title {
+    background-color: #5f9ea0;
+    color: white;
+    padding: 15px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+ul {
+    font-size: 18px;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+
+.first-table {
+    width: 9%;
+    margin: 20px auto; 
+    text-align: center;
+    border: 1px solid black;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 18px;
+    margin-top: 0; 
+}
+
+.second-table {
+    width: 70%;
+    text-align: center;
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-top: 0; 
+}
+
+
+.table-title1 {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold; 
+    margin: 0 auto; 
+    padding-bottom: 5px; 
+    
+}
+
+
+.table-title2 {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    font-weight: normal;
+    text-align: center;
+    margin: 0 auto; 
+    padding-bottom: 5px; 
+}
+
+
+.first-table th, .first-table td,
+.second-table th, .second-table td {
+    border: 1px solid black;
+}
+
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 5px; 
+    margin: 0 auto; 
+}
+
+
+.table-container img {
+    width: 250px;
+    height: auto;
+    border-radius: 5px;
+}

@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from apps.bookmodule.models import Book
+from .models import Book
+
 
 
 
@@ -63,3 +66,26 @@ def __getBooksList():
     book2 = {'id':56788765,'title':'Reversing: Secrets of Reverse Engineering', 'author':'E. Eilam'}
     book3 = {'id':43211234, 'title':'The Hundred-Page Machine Learning Book', 'author':'Andriy Burkov'}
     return [book1, book2, book3]
+
+def add_books(request):
+ mybook = Book(title='Continuous Delivery', author='J. Humble and D. Farley', edition=1)
+ Book.objects.create(title="Deep Learning Fundamentals", author="Ian Goodfellow", price=180, edition=2)
+ Book.objects.create(title="Web Development with Django", author="Michael Kennedy", price=130, edition=4)
+ Book.objects.create(title="Python for Data Analysis", author="Wes McKinney", price=120, edition=3)
+ Book.objects.create(title="Cloud Computing Essentials", author="Rajkumar Buyya", price=160, edition=1)
+ return HttpResponse("Data added successfully !")
+
+
+
+def simple_query(request):
+    mybooks=Book.objects.filter(title__icontains='and') # <- multiple objects
+    return render(request, 'bookmodule/bookList.html', {'books':mybooks})
+
+
+def complex_query(request):
+    mybooks=books=Book.objects.filter(author__isnull = False).filter(title__icontains='and').filter(edition__gte = 2).exclude(price__lte = 100)[:10]
+    if len(mybooks)>=1:
+        return render(request, 'bookmodule/bookList.html', {'books':mybooks})
+    else:
+        return render(request, 'bookmodule/index.html')
+

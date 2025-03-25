@@ -1,19 +1,17 @@
-{% extends "layouts/base.html" %}
-{% block title %} Book List {% endblock title %}
-
-{% block content %}
-<h2>Search Results</h2>
-{% if books %}
-    <ul>
-        {% for book in books %}
-            <li>
-                <strong>Title:</strong> {{ book.title }} <br>
-                <strong>Author:</strong> {{ book.author }} <br>
-                <strong>ID:</strong> {{ book.id }}
-            </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No books found matching your criteria.</p>
-{% endif %}
-{% endblock content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+</head>
+<body>
+    <h1>List of Books</h1>
+    {% for obj in books %}
+        <p>ID: {{ obj.id }}, Title: {{ obj.title }}</p>
+        <hr>
+    {% empty %}
+        <p>No books found.</p>
+    {% endfor %}
+</body>
+</html>

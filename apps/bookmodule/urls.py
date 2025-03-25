@@ -13,4 +13,11 @@ urlpatterns = [
     path('html5/listing/', views.listing_page, name='html5_listing'),
     path('html5/tables/', views.tables_page, name='html5_tables'),
     path('books/search/', search_books, name='search_books'),  # Ensure the trailing slash
+    path('html5/tables/', views.tables_page, name='html5_tables'),
+    path("add_books/", views.add_books, name="add_books"), 
+    path("simple/query", views.simple_query, name="simple_query"),
+    path("complex/query", views.complex_query, name="complex_query"),
+
+    
+
 ]

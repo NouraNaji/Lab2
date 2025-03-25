@@ -69,10 +69,8 @@ def __getBooksList():
 
 def add_books(request):
  mybook = Book(title='Continuous Delivery', author='J. Humble and D. Farley', edition=1)
- Book.objects.create(title="Deep Learning Fundamentals", author="Ian Goodfellow", price=180, edition=2)
- Book.objects.create(title="Web Development with Django", author="Michael Kennedy", price=130, edition=4)
- Book.objects.create(title="Python for Data Analysis", author="Wes McKinney", price=120, edition=3)
- Book.objects.create(title="Cloud Computing Essentials", author="Rajkumar Buyya", price=160, edition=1)
+ Book.objects.create(title="Django and Python", author="John Doe", price=150, edition=3)
+ Book.objects.create(title="AI and Machine Learning", author="Jane Smith", price=200, edition=2)
  return HttpResponse("Data added successfully !")
 
 

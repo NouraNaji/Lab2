@@ -1,0 +1,13 @@
+<h2>Number of Students in Each City</h2>
+<table border="1">
+  <tr>
+    <th>City</th>
+    <th>Number of Students</th>
+  </tr>
+  {% for entry in data %}
+  <tr>
+    <td>{{ entry.address__city }}</td>
+    <td>{{ entry.total }}</td>
+  </tr>
+  {% endfor %}
+</table>

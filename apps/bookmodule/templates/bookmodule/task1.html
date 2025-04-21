@@ -1,0 +1,9 @@
+<h2>Books with Price ≤ 80</h2>
+{% if books %}
+  {% for book in books %}
+    <p>ID: {{ book.id }}, Title: {{ book.title }}, Price: {{ book.price }}</p>
+    <hr>
+  {% endfor %}
+{% else %}
+  <p>No books found.</p>
+{% endif %}

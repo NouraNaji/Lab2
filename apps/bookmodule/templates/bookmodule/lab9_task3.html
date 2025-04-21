@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oldest Student by Department</title>
+</head>
+<body>
+    <h1>Oldest Student by Department</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Department</th>
+                <th>Oldest Student</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in oldest_students %}
+                <tr>
+                    <td>{{ item.department }}</td>
+                    <td>{{ item.oldest_student }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

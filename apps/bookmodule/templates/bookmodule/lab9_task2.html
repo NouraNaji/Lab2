@@ -1,0 +1,13 @@
+<h2>Number of Students in Each Course </h2>
+<table border="1">
+  <tr>
+    <th>Course Title </th>
+    <th>Number of Students</th>
+  </tr>
+  {% for course in data %}
+  <tr>
+    <td>{{ course.title }}</td>
+    <td>{{ course.student_count }}</td>
+  </tr>
+  {% endfor %}
+</table>

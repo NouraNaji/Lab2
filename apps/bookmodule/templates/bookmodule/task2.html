@@ -1,0 +1,9 @@
+<h2>Books with Edition > 3 and title/author containing "co"</h2>
+{% if books %}
+  {% for book in books %}
+    <p>ID: {{ book.id }}, Title: {{ book.title }}, Author: {{ book.author }}, Edition: {{ book.edition }}</p>
+    <hr>
+  {% endfor %}
+{% else %}
+  <p>No books found.</p>
+{% endif %}

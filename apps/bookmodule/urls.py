@@ -1,6 +1,9 @@
 from django.urls import path
 from . import views
 from .views import search_books
+from .models import Book
+
+
 
 urlpatterns = [
     path('', views.index, name='books.index'),
@@ -26,7 +29,14 @@ urlpatterns = [
     path('lab9/task2/', views.task2_lab9, name='lab9-task2'),
     path('lab9/task3/', views.task3_lab9, name='lab9-task3'),
     path('lab9/task4/', views.task4_lab9, name='lab9-task4'),
-
+    path('lab10_part1/listbooks/', views.list_books, name='list_books'),
+    path('lab10_part1/add_book/', views.add_book, name='add_book'),  
+    path('lab10_part1/editbook/<int:id>', views.edit_book, name='edit_book'),  
+    path('lab10_part1/deletebook/<int:id>/', views.delete_book, name='delete_book'),
+    path('lab10_part2/listbooks/', views.list_books, name='list_books_part2'),
+    path('lab10_part2/addbook/', views.add_book, name='add_book_part2'),
+    path('lab10_part2/editbook/<int:id>/', views.edit_book, name='edit_book_part2'),
+    path('lab10_part2/deletebook/<int:id>/', views.delete_book, name='delete_book_part2'),
 
 
 

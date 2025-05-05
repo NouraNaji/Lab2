@@ -1,0 +1,10 @@
+<h2>Book Covers</h2>
+<ul>
+  {% for cover in covers %}
+    <li>
+      <strong>{{ cover.title }}</strong><br>
+      <img src="{{ cover.image.url }}" width="150"alt="Description of the image"><br>
+      {{ cover.description }}
+    </li>
+  {% endfor %}
+</ul>

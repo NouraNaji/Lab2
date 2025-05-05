@@ -10,6 +10,11 @@ from .models import Course
 from django.urls import path
 from . import views
 from .forms import BookForm
+from .forms import StudentForm, AddressForm
+from .forms import Student2Form, Address2Form
+from .models import Address2, Student2
+from .forms import BookCoverForm
+
 
 
 def index(request):
@@ -241,43 +246,139 @@ def task4_lab9(request):
 # Part 2 views:
 
 
-def add_book(request):
+# def add_book(request):
+#     if request.method == 'POST':
+#         form = BookForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('list_books_part2')
+#     else:
+#         form = BookForm()
+#     return render(request, 'bookmodule/add_book.html', {'form': form})
+
+# def simple_query(request):
+#     mybooks=Book.objects.filter(title__icontains='and')
+#     return render(request, 'bookmodule/bookList.html',{'books':mybooks})
+
+# def complex_query(request):
+#     mybooks=books=Book.objects.filter(author__isnull=False).filter(title__icontains='and').filter(edition__gte=2).exclude(price__lte=100)
+#     if len(mybooks)>=1:
+#         return render(request, 'bookmodule/bookList.html',{'books':mybooks})
+#     else:
+#         return render(request, 'bookmodule/index.html')
+
+# def index(request):
+#     return render(request, "bookmodule/index.html")
+
+# def list_books(request):
+#     books = Book.objects.all()
+#     return render(request, 'bookmodule/list_books.html', {'books': books})
+
+# def edit_book(request, id):
+#     book = get_object_or_404(Book, pk=id)
+#     form = BookForm(request.POST or None, instance=book)
+#     if form.is_valid():
+#         form.save()
+#         return redirect('list_books_part2')
+#     return render(request, 'bookmodule/edit_book.html', {'form': form, 'book': book})
+
+# def delete_book(request, id):
+#     book = get_object_or_404(Book, pk=id)
+#     book.delete()
+#     return redirect('list_books_part2')
+
+
+# lab11
+def student_list(request):
+    students = Student.objects.select_related('address').all()
+    return render(request, 'bookmodule/student_list.html', {'students': students})
+
+def student_add(request):
     if request.method == 'POST':
-        form = BookForm(request.POST)
+        address_form = AddressForm(request.POST)
+        student_form = StudentForm(request.POST)
+        if address_form.is_valid() and student_form.is_valid():
+            address = address_form.save()
+            student = student_form.save(commit=False)
+            student.address = address
+            student.save()
+            return redirect('student_list')
+    else:
+        address_form = AddressForm()
+        student_form = StudentForm()
+    return render(request, 'bookmodule/student_form.html', {'address_form': address_form, 'student_form': student_form})
+
+def student_update(request, pk):
+    student = get_object_or_404(Student, pk=pk)
+    address = student.address
+    if request.method == 'POST':
+        student_form = StudentForm(request.POST, instance=student)
+        address_form = AddressForm(request.POST, instance=address)
+        if student_form.is_valid() and address_form.is_valid():
+            address_form.save()
+            student_form.save()
+            return redirect('student_list')
+    else:
+        student_form = StudentForm(instance=student)
+        address_form = AddressForm(instance=address)
+    return render(request, 'bookmodule/student_form.html', {'student_form': student_form, 'address_form': address_form})
+
+def student_delete(request, pk):
+    student = get_object_or_404(Student, pk=pk)
+    student.address.delete()  # Delete address first
+    student.delete()
+    return redirect('student_list')
+
+def add_address(request):
+    if request.method == 'POST':
+        form = AddressForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('list_books_part2')
+            return redirect('add_address')
     else:
-        form = BookForm()
-    return render(request, 'bookmodule/add_book.html', {'form': form})
+        form = AddressForm()
+    return render(request, 'bookmodule/add_address.html', {'form': form})
 
-def simple_query(request):
-    mybooks=Book.objects.filter(title__icontains='and')
-    return render(request, 'bookmodule/bookList.html',{'books':mybooks})
 
-def complex_query(request):
-    mybooks=books=Book.objects.filter(author__isnull=False).filter(title__icontains='and').filter(edition__gte=2).exclude(price__lte=100)
-    if len(mybooks)>=1:
-        return render(request, 'bookmodule/bookList.html',{'books':mybooks})
+def list_students2(request):
+    students = Student2.objects.all()
+    return render(request, 'bookmodule/list_students2.html', {'students': students})
+
+def add_student2(request):
+    if request.method == 'POST':
+        form = Student2Form(request.POST)
+        if form.is_valid():
+            student = form.save(commit=False)
+            student.save()
+            form.save_m2m()  # هذا مهم لحفظ العلاقة many-to-many
+            return redirect('list_students2')
     else:
-        return render(request, 'bookmodule/index.html')
+        form = Student2Form()
+    return render(request, 'bookmodule/add_student2.html', {'form': form})
 
-def index(request):
-    return render(request, "bookmodule/index.html")
 
-def list_books(request):
-    books = Book.objects.all()
-    return render(request, 'bookmodule/list_books.html', {'books': books})
+def add_address2(request):
+    if request.method == 'POST':
+        form = Address2Form(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add_address2')
+    else:
+        form = Address2Form() 
+    return render(request, 'bookmodule/add_address2.html', {'form': form})
 
-def edit_book(request, id):
-    book = get_object_or_404(Book, pk=id)
-    form = BookForm(request.POST or None, instance=book)
-    if form.is_valid():
-        form.save()
-        return redirect('list_books_part2')
-    return render(request, 'bookmodule/edit_book.html', {'form': form, 'book': book})
 
-def delete_book(request, id):
-    book = get_object_or_404(Book, pk=id)
-    book.delete()
-    return redirect('list_books_part2')
+def add_book_cover(request):
+    if request.method == 'POST':
+        form = BookCoverForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('list_book_covers')
+    else:
+        form = BookCoverForm()
+    return render(request, 'bookmodule/add_book_cover.html', {'form': form})
+
+def list_book_covers(request):
+    from .models import BookCover
+    covers = BookCover.objects.all()
+    return render(request, 'bookmodule/list_book_covers.html', {'covers': covers})

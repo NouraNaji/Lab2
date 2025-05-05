@@ -1,0 +1,7 @@
+<h2>Add or Update Student</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ student_form.as_p }}
+  {{ address_form.as_p }}
+  <button type="submit">Save</button>
+</form>

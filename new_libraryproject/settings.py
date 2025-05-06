@@ -21,6 +21,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, "apps", "templates")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+LOGIN_URL = '/users/login/'
 
 TEMPLATES = [
     {
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.bookmodule',
     'apps.usermodule',
+    'users',
 ]
 
 MIDDLEWARE = [
